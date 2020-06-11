@@ -5,11 +5,7 @@ import favicon from '../favicon-32x32.png'
 class LoginComponent extends Component {
     state = {  }
 
-
-
     render() { 
-        
-        const { login } = this.props
 
         return ( 
             <form action="/login" method="POST" className="form-signin">

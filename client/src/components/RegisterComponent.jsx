@@ -6,8 +6,6 @@ class RegisterComponent extends Component {
     state = {  }
 
     render() { 
-        
-       // const { register } = this.props
 
         return ( 
             <form action="/register" method="POST" className="form-signin">

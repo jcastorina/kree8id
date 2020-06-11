@@ -18,6 +18,7 @@ class Images extends Component {
             imgNum={imgNum}
             clickTile={clickTile}
             id={image.id}
+   
             />
         ))}
       </div>

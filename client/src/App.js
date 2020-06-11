@@ -7,6 +7,7 @@ import Login from './routes/Login'
 import Logout from './routes/Logout'
 import Register from './routes/Register'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+
           
 
 class App extends Component {

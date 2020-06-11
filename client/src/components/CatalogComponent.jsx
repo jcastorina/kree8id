@@ -85,12 +85,14 @@ class Catalog extends Component {
               </div>
               
             <div name="spacer" style={{ marginTop: 400 }} />
-
+            {this.state.images.length>0&&this.state.images[0].id===-1?null
+            :
               <Images 
                 images={this.state.images}
                 imgNum={this.state.imgNum}
                 clickTile={this.clickTile}
-              />          
+              />   
+            }       
     </div>
          );
     }

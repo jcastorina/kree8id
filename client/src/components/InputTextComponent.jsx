@@ -22,11 +22,12 @@ class InputText extends Component {
                     border: "none"
                 }}
                 onFocus={ isSelected }
-                onBlur={ isUnselected }
+        
+  
                 />
                
         );
     }
 }
- 
+    
 export default InputText;

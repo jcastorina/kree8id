@@ -5,11 +5,7 @@ import favicon from '../favicon-32x32.png'
 class LogoutComponent extends Component {
     state = {  }
 
-
-
     render() { 
-        
-        const { logout } = this.props
 
         return ( 
             <div>
