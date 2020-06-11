@@ -3,7 +3,6 @@ import React, { Component } from "react";
 class Image extends Component {
   state = {};
   drawBox(im, i) {
-    console.log(im,i)
     let classes = "m-2";
     if (im === i) {
       classes += " box";

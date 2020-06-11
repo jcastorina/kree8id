@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import ImageSelect from './ImageSelectComponent'
+import SaveCancel from './SaveCancelComponent'
 import Images from './ImagesComponent'
 import Cards from './CardsComponent'
 import InputText from './InputTextComponent' 
@@ -11,6 +12,7 @@ class Catalog extends Component {
     state = { 
         imgNum: 0,
         images: [],
+        selected: false
      
      }
     
@@ -31,6 +33,14 @@ class Catalog extends Component {
         this.setState({ imgNum });
       };
 
+      isSelected = () => {
+          this.setState({ selected: true })    
+      }
+
+      isUnselected = () => {
+        this.setState({ selected: false })    
+    }
+
       componentDidMount = async () => {
    
         const f =  await fetch('/myChar')
@@ -48,22 +58,32 @@ class Catalog extends Component {
     } 
    
     render() { 
-        console.log(this.state.imgNum,'state')
         return ( 
           <div className="row cards">
-
             <div className="col-md">
-            <Cards 
-                  image={this.state.images[this.state.imgNum] ? this.state.images[this.state.imgNum].value : loading}
-              />
-              
+              <div className="row">
+                <Cards 
+                      image={this.state.images[this.state.imgNum] ? this.state.images[this.state.imgNum].value : loading}
+                  />
+                  <InputText 
+                      isSelected={this.isSelected}
+                      isUnselected={this.isUnselected}
+                      selected={this.state.selected}
+                  />
+              </div>
               <div name="spacer" style={{ marginTop: 28 }} />
-            <ImageSelect
+            {this.state.selected ? 
+              <SaveCancel 
+
+              />
+            : <ImageSelect
                   clickLeft={this.clickLeft}
                   clickRight={this.clickRight}
               />
+             
+            }
               </div>
-
+              
             <div name="spacer" style={{ marginTop: 400 }} />
 
               <Images 

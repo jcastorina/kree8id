@@ -2,14 +2,29 @@ import React, { Component } from 'react';
 
 class InputText extends Component {
     state = {  }
-    render() { 
+    render() {
+        
+        const { isSelected, isUnselected, selected } = this.props
+
+
         return ( 
-        <div>
-            <input type="text" name="note" id="note" height="256" width="800"  />
-            
-            
-            
-        </div> 
+               
+            <textarea 
+                readOnly={selected}
+                wrap="physical" 
+                name="note" 
+                id="note" 
+                style={{
+                    flex: 1, 
+                    marginLeft: 24, 
+                    marginRight: 24, 
+                    verticalAlign: "top" ,
+                    border: "none"
+                }}
+                onFocus={ isSelected }
+                onBlur={ isUnselected }
+                />
+               
         );
     }
 }
