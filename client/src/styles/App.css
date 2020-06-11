@@ -1,0 +1,33 @@
+.App {
+  text-align: center;
+}
+
+.card::selection {
+  background-color: transparent;
+}
+.card::-moz-selection {
+  background-color: transparent;
+}
+.card {
+  -webkit-user-select: none;
+  -moz-user-select: -moz-none;
+  /*IE10*/
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+
+
+.box {
+  border: black;
+  border-width: 4px;
+  border-style: solid;
+  border-radius: 3px;
+  /*  padding-left: -2px;
+  padding-right: -2px;*/
+}
+
+.bump {
+  padding-top: -8px;
+}
