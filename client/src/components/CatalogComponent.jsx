@@ -12,7 +12,8 @@ class Catalog extends Component {
     state = { 
         imgNum: 0,
         images: [],
-        selected: false
+        selected: false,
+        border: "none"
      
      }
     
@@ -39,7 +40,7 @@ class Catalog extends Component {
 
       isUnselected = () => {
         this.setState({ selected: false })    
-    }
+      }
 
       componentDidMount = async () => {
    
@@ -69,6 +70,7 @@ class Catalog extends Component {
                       isSelected={this.isSelected}
                       isUnselected={this.isUnselected}
                       selected={this.state.selected}
+                      border={this.state.border}
                   />
               </div>
               <div name="spacer" style={{ marginTop: 28 }} />

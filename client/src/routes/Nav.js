@@ -19,6 +19,9 @@ function Nav() {
         <Link style={navStyle} to="/catalog">
           <li>Catalog</li>
         </Link>
+        <Link style={navStyle} to="/upload">
+          <li>Upload</li>
+        </Link>
         <Link style={navStyle} to="/login">
           <li>Login</li>
         </Link>

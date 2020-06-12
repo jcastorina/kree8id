@@ -4,8 +4,9 @@ class InputText extends Component {
     state = {  }
     render() {
         
-        const { isSelected, isUnselected, selected } = this.props
+        const { isSelected, isUnselected, selected, border } = this.props
 
+        console.log(border)
 
         return ( 
                
@@ -19,7 +20,7 @@ class InputText extends Component {
                     marginLeft: 24, 
                     marginRight: 24, 
                     verticalAlign: "top" ,
-                    border: "none"
+                    border: border
                 }}
                 onFocus={ isSelected }
         

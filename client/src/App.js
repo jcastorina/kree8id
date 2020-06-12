@@ -3,6 +3,7 @@ import './styles/App.css';
 import Nav from "./routes/Nav"
 import About from './routes/About'
 import Catalog from './routes/Catalog'
+import Upload from './routes/Upload'
 import Login from './routes/Login'
 import Logout from './routes/Logout'
 import Register from './routes/Register'
@@ -23,6 +24,7 @@ class App extends Component {
             <Route path="/" exact component={Home} />
             <Route path="/about" component={About}/>
             <Route path="/catalog" exact component={Catalog} />
+            <Route path="/upload" exact component={Upload} />
             <Route path="/login" exact component={Login} />
             <Route path="/register" exact component={Register} />
             <Route path="/logout" exact component={Logout} />
