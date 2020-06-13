@@ -4,17 +4,18 @@ class InputText extends Component {
     state = {  }
     render() {
         
-        const { isSelected, isUnselected, selected, border } = this.props
-
-        console.log(border)
+        const { border, textVal } = this.props
 
         return ( 
                
             <textarea 
-                readOnly={selected}
                 wrap="physical" 
                 name="note" 
-                id="note" 
+                id="note"
+                ref={val=>this.textArea=val}
+                onChange={()=>{
+                    textVal(this.textArea.value)
+                }}
                 style={{
                     flex: 1, 
                     marginLeft: 24, 
@@ -22,11 +23,7 @@ class InputText extends Component {
                     verticalAlign: "top" ,
                     border: border
                 }}
-                onFocus={ isSelected }
-        
-  
-                />
-               
+            />              
         );
     }
 }

@@ -9,7 +9,7 @@ class Cards extends Component {
         <img
           src={this.props.image}
           alt="mainCard"
-          style={{ height: 320, width: 320 }}
+          style={{ height: 320, width: 320, objectFit: "cover" }}
           className="card"
         />
       </div>

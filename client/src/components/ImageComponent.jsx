@@ -21,7 +21,7 @@ class Image extends Component {
           }}
           src={value}
           alt="tile"
-          style={{ height: 64, width: 64 }}
+          style={{ height: 64, width: 64, objectFit: "cover" }}
           className={this.drawBox(imgNum, parseInt(id))}
         />
       </div>

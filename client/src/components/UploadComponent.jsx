@@ -8,21 +8,29 @@ class Upload extends Component {
         super(props)
         this.state = { 
             file: null,
-            selected: false,
-            border: '2'
+            fileUrl: null,
+            border: '2',
+            text: ''
         }
         
         this.handleChange = this.handleChange.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
+        this.textVal = this.textVal.bind(this)
+        this.handleClick = this.handleClick.bind(this)
     }
     
     handleChange(event) {
         event.target.files[0]?
         this.setState({ 
-            file: URL.createObjectURL(event.target.files[0])
+            fileUrl: URL.createObjectURL(event.target.files[0]),
+            file: event.target.files[0]
         })
         :
-        this.setState({file: null})
+        this.setState({
+            fileUrl: null,
+            file: null
+        })
+        console.log(this.state)
     }
 
     handleSubmit(event) {
@@ -30,16 +38,22 @@ class Upload extends Component {
         event.preventDefault()
     }
 
-    isSelected = () => {
-        this.setState({ selected: true })    
-    }
-
-    isUnselected = () => {
-      this.setState({ selected: false })    
-    }
-
     handleClick = () => {
         this.inputElement.click()
+    }
+
+    textVal = (t) => {
+        this.setState({ text: t })
+    }
+
+    submit = (e) => {
+        e.preventDefault()
+        let formData = new FormData();
+        formData.append('imageFile', this.state.file)
+        const xhr = new XMLHttpRequest()
+        xhr.open("POST", "/upload", true)
+        xhr.send(formData)
+  
     }
 
     componentDidMount = async () => {
@@ -54,47 +68,51 @@ class Upload extends Component {
                     <div className="row">
                        
                         
-                        <img 
-                            src={
-                                this.state.file ? this.state.file : uploadImg
-                            } 
-                            style={{ 
-                                height: 320, 
-                                width: 320,
-                                objectFit: "cover"
-                                
-                            }}
-                            alt="upload"
-                            onClick={this.handleClick}
-                        />
-                        <InputText  
-                            isSelected={this.isSelected}
-                            isUnselected={this.isUnselected}
-                            selected={this.state.selected}
-                            border={this.state.border}
-                        />                                         
-                    </div>
-                                        
-                    <div name="spacer" style={{ marginTop: 28 }} />
-
-                        <input 
-                            type="submit" 
-                            value="Upload" 
-                            style={{verticalAlign: "left"}}
-                        />
-
+                    <img 
+                        src={
+                            this.state.fileUrl ? this.state.fileUrl : uploadImg
+                        } 
+                        style={{ 
+                            height: 320, 
+                            width: 320,
+                            objectFit: "cover"
+                            
+                        }}
+                        alt="upload"
+                        onClick={this.handleClick}
+                    />
+                    <InputText  
+                        border={this.state.border}
+                        textVal={this.textVal}
+                  
+                     
+                    />                                         
+                    </div>                               
+                <div name="spacer" style={{ marginTop: 28 }} />
+                    <input 
+                        type="submit" 
+                        value="Upload" 
+                        onClick={this.submit}
+                    />
+                      <input 
+                        type="submit" 
+                        value="check" 
+                        onClick={()=>{
+                            console.log(this.state.file)
+                        }}
+                    />
                 </div>
-            </div>
+                </div>
 
-            <input 
-                            ref={input=>this.inputElement=input}
-                            type="file"         
-                            onChange={this.handleChange}
-                            id="file"
-                            style={{
-                                visibility: "hidden"
-                            }}
-                        />
+                <input 
+                    ref={input=>this.inputElement=input}
+                    type="file"         
+                    onChange={this.handleChange}
+                    id="file"
+                    style={{
+                        visibility: "hidden"
+                    }}
+                />
             </form>
         );
     }
