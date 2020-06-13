@@ -30,7 +30,6 @@ class Upload extends Component {
             fileUrl: null,
             file: null
         })
-        console.log(this.state)
     }
 
     handleSubmit(event) {
@@ -93,13 +92,6 @@ class Upload extends Component {
                         type="submit" 
                         value="Upload" 
                         onClick={this.submit}
-                    />
-                      <input 
-                        type="submit" 
-                        value="check" 
-                        onClick={()=>{
-                            console.log(this.state.file)
-                        }}
                     />
                 </div>
                 </div>

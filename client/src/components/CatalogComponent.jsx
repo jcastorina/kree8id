@@ -9,29 +9,47 @@ import noPic from '../no_pictures.png'
 
 class Catalog extends Component {
 
-    state = { 
+  constructor(props){
+    super(props)
+    this.state = { 
+      imgNum: 0,
+      images: [],
+      selected: false,
+      border: "none",
+      curr: null,   
+    }
+    
+    this.clickLeft = this.clickLeft.bind(this)
+    this.clickRight = this.clickRight.bind(this)
+}
+
+  /*  state = { 
         imgNum: 0,
         images: [],
         selected: false,
-        border: "none"
-     
-     }
+        border: "none",
+        curr: null,    
+     }*/
     
-    clickLeft = () => {
+    clickLeft () {
         const len = this.state.images.length;
         const imgNum = (this.state.imgNum - 1 + len) % len;
         this.setState({ imgNum });
+        console.log(this.state)
       };
     
-     clickRight = () => {
+     clickRight () {
+       
         const len = this.state.images.length;
         const imgNum = (this.state.imgNum + 1) % len;
         this.setState({ imgNum });
+        console.log(this.state)
       };
     
       clickTile = (num) => {
         const imgNum = parseInt(num);
         this.setState({ imgNum });
+        console.log(this.state)
       };
 
       isSelected = () => {
@@ -41,6 +59,21 @@ class Catalog extends Component {
       isUnselected = () => {
         this.setState({ selected: false })    
       }
+
+      delete = async (e) => {
+        let images = this.state.images
+       // let xhr = new XMLHttpRequest()
+       // xhr.open("POST", "/delete", true)
+       // xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded")
+       // xhr.send(e)
+
+        for(let i in images){
+          if(images[i].value === e){
+            images.splice(i,1)
+            this.setState({ images: images })
+          }      
+        }
+    }
 
       componentDidMount = async () => {
    
@@ -60,30 +93,40 @@ class Catalog extends Component {
    
     render() { 
         return ( 
-          <div>
+        <div>
           <div className="row cards">
             <div className="col-md">
               <div className="row">
                 <Cards 
-                      image={this.state.images[this.state.imgNum] ? this.state.images[this.state.imgNum].value : loading}
-                  />
-                  <InputText 
-                      isSelected={this.isSelected}
-                      isUnselected={this.isUnselected}
-                      selected={this.state.selected}
-                      border={this.state.border}
-                  />
+                  image={
+                    this.state.images[this.state.imgNum] 
+                    ? this.state.images[this.state.imgNum].value 
+                    : loading
+                  }
+                />
+                <InputText 
+                  isSelected={this.isSelected}
+                  isUnselected={this.isUnselected}
+                  selected={this.state.selected}
+                  border={this.state.border}
+                />
               </div>
               <div name="spacer" style={{ marginTop: 28 }} />
             {this.state.selected ? 
               <SaveCancel 
 
               />
-            : <ImageSelect
+            : <div>
+              <button onClick={()=>{
+                
+                this.delete(this.state.images[this.state.imgNum].value)
+                
+              }}>Delete</button>
+              <ImageSelect
                   clickLeft={this.clickLeft}
                   clickRight={this.clickRight}
               />
-             
+             </div>
             }
               </div>
               

@@ -4,9 +4,9 @@ import Image from "./ImageComponent";
 class Images extends Component {
   state = {};
   render() {
-    let off = false
+
     const { images, imgNum, clickTile } = this.props;
-    typeof images[0] === undefined ? off = false : off = true
+
       
     
     return (
