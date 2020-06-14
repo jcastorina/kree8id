@@ -1,7 +1,17 @@
 import React, { Component } from 'react';
 
 class Feed extends Component {
-    state = {  }
+    constructor(props){
+        super(props)
+        this.state = {
+
+        }
+    }
+
+    componentDidMount = async () => {
+
+    }
+
     render() { 
         return ( 
             <div>

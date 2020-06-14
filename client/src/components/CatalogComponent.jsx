@@ -83,10 +83,14 @@ class Catalog extends Component {
         imgArray.push({id:i,value:images.images[i]})          
       }
     } else {
-      imgArray.push({id:-1,value:noPic})
+      imgArray.push({
+        id:-1,
+        value: {
+          fileName: noPic, 
+          text: "You should upload something!"}})
     }
     this.setState({ images: imgArray })
-    console.log(this.state.images[0].value.text)
+    
   } 
    
   render() { 
