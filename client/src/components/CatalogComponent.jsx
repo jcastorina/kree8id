@@ -22,14 +22,6 @@ class Catalog extends Component {
     this.clickLeft = this.clickLeft.bind(this)
     this.clickRight = this.clickRight.bind(this)
 }
-
-  /*  state = { 
-        imgNum: 0,
-        images: [],
-        selected: false,
-        border: "none",
-        curr: null,    
-     }*/
     
     clickLeft () {
         const len = this.state.images.length;
@@ -61,11 +53,12 @@ class Catalog extends Component {
       }
 
       delete = async (e) => {
+       // this.clickRight()
         let images = this.state.images
-       // let xhr = new XMLHttpRequest()
-       // xhr.open("POST", "/delete", true)
-       // xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded")
-       // xhr.send(e)
+        let xhr = new XMLHttpRequest()
+        xhr.open("POST", "/delete", true)
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded")
+        xhr.send(e)
 
         for(let i in images){
           if(images[i].value === e){
@@ -73,6 +66,15 @@ class Catalog extends Component {
             this.setState({ images: images })
           }      
         }
+        this.reorder()
+    }
+
+    reorder () {
+      let images = this.state.images
+      for(let i in images){
+        images[i].id = i
+      }
+      this.setState({ images: images })
     }
 
       componentDidMount = async () => {

@@ -6,9 +6,7 @@ class Images extends Component {
   render() {
 
     const { images, imgNum, clickTile } = this.props;
-
-      
-    
+ 
     return (
       <div className="row">
         {images.map((image) => (
@@ -18,7 +16,6 @@ class Images extends Component {
             imgNum={imgNum}
             clickTile={clickTile}
             id={image.id}
-   
             />
         ))}
       </div>
