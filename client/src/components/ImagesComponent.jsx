@@ -12,7 +12,7 @@ class Images extends Component {
         {images.map((image) => (
             <Image
             key={image.id}
-            value={image.value}
+            value={image.value.fileName}
             imgNum={imgNum}
             clickTile={clickTile}
             id={image.id}

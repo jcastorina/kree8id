@@ -1,23 +1,20 @@
 import React, { Component } from 'react';
 
-class InputText extends Component {
+class ViewText extends Component {
     state = {  }
     render() {
         
-        const { border, textVal, textPost } = this.props
+        const { border, text } = this.props
 
         return ( 
                
             <textarea 
-           
+                readOnly
                 wrap="physical" 
                 name="note" 
                 id="note"
                 ref={val=>this.textArea=val}
-                onChange={()=>{
-                    textVal(this.textArea.value)
-                }}
-                value={textPost}
+                value={text}
                 style={{
                     flex: 1, 
                     marginLeft: 24, 
@@ -30,4 +27,4 @@ class InputText extends Component {
     }
 }
     
-export default InputText;
+export default ViewText;

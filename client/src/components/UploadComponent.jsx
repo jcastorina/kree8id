@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import InputText from './InputTextComponent' 
+//import Dialog from './DialogComponent'
 import uploadImg from '../uploadImg.png'
 
 class Upload extends Component {
@@ -14,9 +15,9 @@ class Upload extends Component {
         }
         
         this.handleChange = this.handleChange.bind(this)
-        this.handleSubmit = this.handleSubmit.bind(this)
         this.textVal = this.textVal.bind(this)
         this.handleClick = this.handleClick.bind(this)
+
     }
     
     handleChange(event) {
@@ -32,11 +33,6 @@ class Upload extends Component {
         })
     }
 
-    handleSubmit(event) {
-        alert('submitted' + this.state.value)
-        event.preventDefault()
-    }
-
     handleClick = () => {
         this.inputElement.click()
     }
@@ -47,12 +43,19 @@ class Upload extends Component {
 
     submit = (e) => {
         e.preventDefault()
+
         let formData = new FormData();
         formData.append('imageFile', this.state.file)
-        const xhr = new XMLHttpRequest()
-        xhr.open("POST", "/upload", true)
-        xhr.send(formData)
-  
+        formData.append('text', this.state.text)
+
+        fetch('/upload', {
+            method: "POST",
+            body: formData
+        })
+        .then(res => res.json())
+        .then(data => console.log(data))
+        .catch(err => console.log(err,' err'))
+
     }
 
     componentDidMount = async () => {
@@ -61,12 +64,10 @@ class Upload extends Component {
    
     render() { 
         return ( 
-            <form onSubmit={this.handleSubmit}>
+            <form>
             <div className="row cards">
                 <div className="col-md">
-                    <div className="row">
-                       
-                        
+                    <div className="row">                        
                     <img 
                         src={
                             this.state.fileUrl ? this.state.fileUrl : uploadImg
@@ -74,8 +75,7 @@ class Upload extends Component {
                         style={{ 
                             height: 320, 
                             width: 320,
-                            objectFit: "cover"
-                            
+                            objectFit: "cover"                         
                         }}
                         alt="upload"
                         onClick={this.handleClick}
@@ -83,7 +83,7 @@ class Upload extends Component {
                     <InputText  
                         border={this.state.border}
                         textVal={this.textVal}
-                  
+                        textPost={this.state.text}
                      
                     />                                         
                     </div>                               

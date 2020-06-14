@@ -3,7 +3,7 @@ import ImageSelect from './ImageSelectComponent'
 import SaveCancel from './SaveCancelComponent'
 import Images from './ImagesComponent'
 import Cards from './CardsComponent'
-import InputText from './InputTextComponent' 
+import ViewText from './ViewTextComponent' 
 import loading from '../loading.png'
 import noPic from '../no_pictures.png'
 
@@ -14,8 +14,8 @@ class Catalog extends Component {
     this.state = { 
       imgNum: 0,
       images: [],
-      selected: false,
       border: "none",
+      selected: false,
       curr: null,   
     }
     
@@ -44,16 +44,7 @@ class Catalog extends Component {
         console.log(this.state)
       };
 
-      isSelected = () => {
-          this.setState({ selected: true })    
-      }
-
-      isUnselected = () => {
-        this.setState({ selected: false })    
-      }
-
       delete = async (e) => {
-       // this.clickRight()
         let images = this.state.images
         let xhr = new XMLHttpRequest()
         xhr.open("POST", "/delete", true)
@@ -81,8 +72,9 @@ class Catalog extends Component {
    
         const f =  await fetch('/myChar')
         const images = await f.json()
+       
         let imgArray = []
-
+        
         if(images.images.length > 0){
           for(let i in images.images){
             imgArray.push({id:i,value:images.images[i]})          
@@ -91,6 +83,7 @@ class Catalog extends Component {
           imgArray.push({id:-1,value:noPic})
         }
         this.setState({ images: imgArray })
+        console.log(this.state.images[0].value.text)
     } 
    
     render() { 
@@ -102,14 +95,15 @@ class Catalog extends Component {
                 <Cards 
                   image={
                     this.state.images[this.state.imgNum] 
-                    ? this.state.images[this.state.imgNum].value 
+                    ? this.state.images[this.state.imgNum].value.fileName 
                     : loading
                   }
                 />
-                <InputText 
-                  isSelected={this.isSelected}
-                  isUnselected={this.isUnselected}
-                  selected={this.state.selected}
+                <ViewText 
+                  text={
+                    this.state.images[this.state.imgNum] ?
+                    this.state.images[this.state.imgNum].value.text :
+                    ' ' }
                   border={this.state.border}
                 />
               </div>

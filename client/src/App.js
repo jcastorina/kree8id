@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import './styles/App.css';
 import Nav from "./routes/Nav"
 import About from './routes/About'
+import Feed from './routes/Feed'
 import Catalog from './routes/Catalog'
 import Upload from './routes/Upload'
 import Login from './routes/Login'
@@ -23,6 +24,7 @@ class App extends Component {
           <Switch>
             <Route path="/" exact component={Home} />
             <Route path="/about" component={About}/>
+            <Route path="/feed" component={Feed}/>
             <Route path="/catalog" exact component={Catalog} />
             <Route path="/upload" exact component={Upload} />
             <Route path="/login" exact component={Login} />

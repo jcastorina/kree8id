@@ -11,16 +11,19 @@ function Nav() {
   return (
     <div>
 <nav>
-    <h3>Logo</h3>
+    <h3>kree8id</h3>
     <ul className="nav-links">
-        <Link style={navStyle} to="/about">
-          <li>About</li>
+        <Link style={navStyle} to="/feed">
+          <li>Feed</li>
         </Link>
         <Link style={navStyle} to="/catalog">
           <li>Catalog</li>
         </Link>
         <Link style={navStyle} to="/upload">
           <li>Upload</li>
+        </Link>
+        <Link style={navStyle} to="/about">
+          <li>About</li>
         </Link>
         <Link style={navStyle} to="/login">
           <li>Login</li>
