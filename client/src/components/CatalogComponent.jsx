@@ -21,73 +21,76 @@ class Catalog extends Component {
     
     this.clickLeft = this.clickLeft.bind(this)
     this.clickRight = this.clickRight.bind(this)
-}
+  }
     
-    clickLeft () {
-        const len = this.state.images.length;
-        const imgNum = (this.state.imgNum - 1 + len) % len;
-        this.setState({ imgNum });
-        console.log(this.state)
-      };
+  clickLeft () {
+    const len = this.state.images.length;
+    const imgNum = (this.state.imgNum - 1 + len) % len;
+    this.setState({ imgNum });
+  };
     
-     clickRight () {
-       
-        const len = this.state.images.length;
-        const imgNum = (this.state.imgNum + 1) % len;
-        this.setState({ imgNum });
-        console.log(this.state)
-      };
+  clickRight () {
+      
+    const len = this.state.images.length;
+    const imgNum = (this.state.imgNum + 1) % len;
+    this.setState({ imgNum });
+  };
     
-      clickTile = (num) => {
-        const imgNum = parseInt(num);
-        this.setState({ imgNum });
-        console.log(this.state)
-      };
+  clickTile = (num) => {
+    const imgNum = parseInt(num);
+    this.setState({ imgNum });
+  };
 
-      delete = async (e) => {
-        let images = this.state.images
-        let xhr = new XMLHttpRequest()
-        xhr.open("POST", "/delete", true)
-        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded")
-        xhr.send(e)
+  delete = async (e) => {
+      
+    let val = e.value
+    let images = this.state.images
 
-        for(let i in images){
-          if(images[i].value === e){
-            images.splice(i,1)
-            this.setState({ images: images })
-          }      
-        }
-        this.reorder()
+    fetch("/delete", {
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(val)
+    })
+
+    for(let i in images){
+      if(images[i].value._id === val._id){
+        images.splice(i,1)
+        this.setState({ images: images })
+      }      
     }
+    this.reorder()
+  }
 
-    reorder () {
-      let images = this.state.images
-      for(let i in images){
-        images[i].id = i
+  reorder () {
+    let images = this.state.images
+    for(let i in images){
+      images[i].id = i
+    }
+    this.setState({ images: images })
+  }
+
+  componentDidMount = async () => {
+
+    const f =  await fetch('/myChar')
+    const images = await f.json()
+    
+    let imgArray = []
+    
+    if(images.images.length > 0){
+      for(let i in images.images){
+        imgArray.push({id:i,value:images.images[i]})          
       }
-      this.setState({ images: images })
+    } else {
+      imgArray.push({id:-1,value:noPic})
     }
-
-      componentDidMount = async () => {
+    this.setState({ images: imgArray })
+    console.log(this.state.images[0].value.text)
+  } 
    
-        const f =  await fetch('/myChar')
-        const images = await f.json()
-       
-        let imgArray = []
-        
-        if(images.images.length > 0){
-          for(let i in images.images){
-            imgArray.push({id:i,value:images.images[i]})          
-          }
-        } else {
-          imgArray.push({id:-1,value:noPic})
-        }
-        this.setState({ images: imgArray })
-        console.log(this.state.images[0].value.text)
-    } 
-   
-    render() { 
-        return ( 
+  render() { 
+    return ( 
         <div>
           <div className="row cards">
             <div className="col-md">
@@ -115,7 +118,7 @@ class Catalog extends Component {
             : <div>
               <button onClick={()=>{
                 
-                this.delete(this.state.images[this.state.imgNum].value)
+                this.delete(this.state.images[this.state.imgNum])
                 
               }}>Delete</button>
               <ImageSelect
@@ -124,7 +127,7 @@ class Catalog extends Component {
               />
              </div>
             }
-              </div>
+            </div>
               
      
     </div>
@@ -140,8 +143,8 @@ class Catalog extends Component {
             
             }  
     </div>
-         );
-    }
+    );
+  }
 }
  
 export default Catalog;
