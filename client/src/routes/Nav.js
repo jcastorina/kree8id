@@ -22,8 +22,11 @@ function Nav() {
         <Link style={navStyle} to="/upload">
           <li>Upload</li>
         </Link>
-        <Link style={navStyle} to="/about">
-          <li>About</li>
+        <Link style={navStyle} to="/profile">
+          <li>Profile</li>
+        </Link>
+        <Link style={navStyle} to="/search">
+          <li>Search</li>
         </Link>
         <Link style={navStyle} to="/login">
           <li>Login</li>

@@ -1,0 +1,28 @@
+p {
+    float: left;
+}
+
+.userPanel {
+    border-width: 1px;
+    border-radius: 2px;
+    border-style: solid;
+    width: 50%;
+  /*  text-align: center;*/
+    vertical-align: middle;
+    display: inline-block;
+    margin: 1px;
+    height: 40px;
+}
+
+.userPanel:hover {
+    background: #DDFFDD
+}
+
+.addButton {
+    float: right;
+    cursor: pointer;
+}
+
+.addButton:hover {
+    background: #00DD33
+}
