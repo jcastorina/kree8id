@@ -7,12 +7,38 @@ class Search extends Component {
 
         this.state = {
             users: [],
-            get: false
+            get: false,
+            friends: []
         }
     }
 
     componentDidMount = async () => {
+        const rawFriends = await fetch('/myFriends')
+        const friends = await rawFriends.json()
+        let index = []
+        for(let i in friends){
+            index.push({ id: i, value: friends[i] })
+        }
+        this.setState({ friends: index })
+
+        let userArray = []
         
+
+        await fetch('/allUsersButMe')
+        .then(res=>res.json())
+        .then(json=>{
+            for(let i in json){
+            
+                let obj = { id: i, user: json[i], friend: false }
+                for(let j in this.state.friends){
+                    if(json[i] === this.state.friends[j].value){
+                        obj.friend = true
+                    }        
+                }
+                userArray.push(obj)        
+            }
+           this.setState({ users: userArray, get: true })
+        })
     }
 
     friendToggle = async (e) => {
@@ -32,6 +58,8 @@ class Search extends Component {
     getUsers = async () => {
         // need to fetch /friends as well,
         // and color code tile based on friendship 
+        
+        
         let userArray = []
         
 
@@ -39,11 +67,17 @@ class Search extends Component {
         .then(res=>res.json())
         .then(json=>{
             for(let i in json){
-                let obj = { id: i, user: json[i] }
-                userArray.push(obj)
+            
+                let obj = { id: i, user: json[i], friend: false }
+                for(let j in this.state.friends){
+                    if(json[i] === this.state.friends[j].value){
+                        obj.friend = true
+                    }        
+                }
+                userArray.push(obj)        
             }
-            this.setState({ users: userArray, get: true })
-        })      
+           this.setState({ users: userArray, get: true })
+        })
     }
 
     render() { 
@@ -58,10 +92,11 @@ class Search extends Component {
                 {this.state.get ?
                     <UsersComponent
                 
-                    userList={this.state.users}
+                    users={this.state.users}
+                    friends={this.state.friends}
                     friendToggle={this.friendToggle}
                     />
-                    : <h1>packle</h1>
+                    : null
                 }
             </div>
 

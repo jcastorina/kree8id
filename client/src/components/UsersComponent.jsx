@@ -10,15 +10,18 @@ class Users extends Component {
     }
     render() { 
         
-        const { userList, friendToggle } = this.props
-        
+        const { users, friendToggle } = this.props
+
         return ( 
             <div>
-                {userList.map((user)=>(
+                
+                {users.map((user)=>(
+                                      
                     <UserComponent 
                         key={user.id}
-                        user={user.user}
+                        user={user}
                         friendToggle={friendToggle}
+                    
                     />
                 ))}
             </div>
