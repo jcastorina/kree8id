@@ -2,7 +2,7 @@ p {
     float: left;
 }
 
-.userPanel {
+.panel {
     border-width: 1px;
     border-radius: 2px;
     border-style: solid;
@@ -14,8 +14,16 @@ p {
     height: 40px;
 }
 
-.userPanel:hover {
+.user:hover {
     background: #DDFFDD
+}
+
+.friend {
+    background: #CCFFEE
+}
+
+.friend:hover {
+    background: #77AAAA
 }
 
 .addButton {

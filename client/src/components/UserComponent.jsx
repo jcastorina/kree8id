@@ -11,34 +11,38 @@ class User extends Component {
     render() { 
         
         const { user, friendToggle } = this.props
-        let color
-        
+        let style = "panel"
+
         if(user.friend){
-            color = {
-                backgroundColor: "#CCFFEE",
-                
-            }
+            style+=" friend"
         } else {
-            color = {backgroundColor:"none"}
+            style+=" user"
         }
+    
         return ( 
             <div 
-                className="userPanel"
-                style={color}
+                className={style}
+  
+               
                 >
                 
                 <p>{user.user}</p>
-                {color.backgroundColor==="none"?
-                                    <p
+                {
+                    !user.friend
+                    ?
+                    <p
                         className="addButton"
                         onClick={()=>{
                             friendToggle(user)
-                        }}
-                        
-                    >
-                    Add
-                    </p>
-                    : null
+                        }}   
+                    >Add</p>
+                    :
+                    <p
+                    className="addButton"
+                    onClick={()=>{
+                        friendToggle(user)
+                    }}   
+                    >Remove</p> 
                     }
                 
 
