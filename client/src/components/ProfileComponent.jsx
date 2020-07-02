@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import '../styles/Profile.css'
 import FriendsComponent from './FriendsComponent'
 
 class Profile extends Component {
@@ -21,24 +22,20 @@ class Profile extends Component {
         this.setState({ friends: index })
     }
 
-    render() { 
-          
-            return ( 
-            <div>
-                <h1>profile</h1>
-                
-                    {this.state.friends?
-                    <FriendsComponent
-                        friends = {this.state.friends}
-                    />
-                    : null
-                    }
-                
-            </div>
-
-         );
+    render() {        
+        
+        return ( 
+        <div>
+            <h1>profile</h1>               
+                {this.state.friends?
+                <FriendsComponent
+                    friends = {this.state.friends}
+                />
+                : null
+                }              
+        </div>
+        );
     }
 }
  
 export default Profile;
-

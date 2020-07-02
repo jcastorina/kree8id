@@ -1,6 +1,6 @@
-import React, {Component} from 'react';
-import './styles/App.css';
-import Nav from "./routes/Nav"
+import React from 'react';
+import './styles/App.css'
+import Nav from "./components/Nav"
 import Profile from './routes/Profile'
 import Feed from './routes/Feed'
 import Search from './routes/Search'
@@ -9,37 +9,37 @@ import Upload from './routes/Upload'
 import Login from './routes/Login'
 import Logout from './routes/Logout'
 import Register from './routes/Register'
+import Button from './routes/Button'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import Private from './routes/Private'
+import { AuthContext } from './routes/context/auth'
 
-          
-
-class App extends Component {
+function App (props) {
   
-  
 
-  render() {
-    return (
+  console.log(localStorage)
+
+  return (
+    <AuthContext.Provider value={true}>
       <Router>
-        <div className="App text-center">
-          <Nav />
-          <Switch>
-            <Route path="/" exact component={Home} />
-            <Route path="/profile" component={Profile}/>
-            <Route path="/feed" component={Feed}/>
-            <Route path="/search" component={Search}/>
-            <Route path="/catalog" exact component={Catalog} />
-            <Route path="/upload" exact component={Upload} />
-            <Route path="/login" exact component={Login} />
-            <Route path="/register" exact component={Register} />
-            <Route path="/logout" exact component={Logout} />
-          
-
-          </Switch>
-        </div>
-
+        <Nav />
+        <Switch>
+          <Route path="/" exact component={Home} />
+          <Private path="/profile" component={Profile} />
+          <Route path="/feed" component={Feed}/>
+          <Route path="/search" component={Search}/>
+          <Route path="/catalog" exact component={Catalog} />
+          <Route path="/upload" exact component={Upload} />
+          <Route path="/login" exact component={Login} />
+          <Route path="/register" exact component={Register} />
+          <Route path="/logout" exact component={Logout} />
+          <Route path="/button" exact component={Button} />
+        
+        </Switch>
+      
       </Router>
-    );
-  }
+    </AuthContext.Provider>
+  );
 }
 
 const Home = () => (
@@ -47,6 +47,5 @@ const Home = () => (
     <h1>Home Page</h1>
   </div>
 )
-
 
 export default App;

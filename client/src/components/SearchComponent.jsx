@@ -1,4 +1,4 @@
-import React, { Component, useState, useEffect } from 'react';
+import React, { Component } from 'react';
 import UsersComponent from './UsersComponent'
 
 class Search extends Component {
@@ -16,7 +16,6 @@ class Search extends Component {
         this.filter = this.filter.bind(this)
     }
 
- 
     friends = async () => {
     
         const rawFriends = await fetch('/myFriends')
@@ -33,7 +32,6 @@ class Search extends Component {
 
         let userArray = []
         
-
         await fetch('/allUsersButMe')
         .then(res=>res.json())
         .then(json=>{
@@ -51,13 +49,8 @@ class Search extends Component {
         })
     }
 
-    componentDidUpdate = async () => {
-    }
-
     friendToggle = async (e) => {
         
-        
-
         await fetch('/removeFriend', {
             method: "POST",
             headers: {
@@ -69,8 +62,6 @@ class Search extends Component {
         .then(res=>res.json())
         .then(json=>{
             this.friends()
-            
-            console.log(e.user+' '+json.friend)
             const { users } = this.state
             
             for(let i in users){
@@ -81,20 +72,12 @@ class Search extends Component {
             }
             this.setState({ users: users })
         })
-        
-   
-
-
     }
 
     getUsers = async () => {
-        // need to fetch /friends as well,
-        // and color code tile based on friendship 
-        
-        
+             
         let userArray = []
         
-
         await fetch('/allUsersButMe')
         .then(res=>res.json())
         .then(json=>{
@@ -109,7 +92,6 @@ class Search extends Component {
                 userArray.push(obj)        
             }
            this.setState({ users: userArray, get: true })
-           console.log(this.state)
         })
     }
 
@@ -121,14 +103,10 @@ class Search extends Component {
             let regex = new RegExp('^'+v+'')
            
             if((users[i].user).match(regex)){
-                console.log('match ',i)
                 visUsers.push(users[i])
             }
-        }
-   
-        this.setState({ visUsers: visUsers, search: v })
-    
-        
+        }   
+        this.setState({ visUsers: visUsers, search: v })        
     }
 
     render() { 
@@ -162,7 +140,6 @@ class Search extends Component {
                     : null
                 }
             </div>
-
          );
     }
 }

@@ -1,13 +1,21 @@
 import React from 'react';
 import ProfileComponent from '../components/ProfileComponent'
-import '../styles/Profile.css'
 
-function Profile() {
-  return (
-    <div> 
-      <ProfileComponent />
-    </div>
-  );
+
+const Profile = (props) => {
+
+
+    return (
+        <ProfileComponent 
+
+        />
+
+    )
+
+
 }
 
-export default Profile;
+export default Profile
+
+//            isLoggedIn={this.isLoggedIn.bind(this)}
+//{...props}

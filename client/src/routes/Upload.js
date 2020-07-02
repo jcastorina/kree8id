@@ -1,5 +1,6 @@
 import React from 'react';
 import UploadComponent from '../components/UploadComponent'
+import '../styles/Upload.css'
 
 function Upload() {
   return (

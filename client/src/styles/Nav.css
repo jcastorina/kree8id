@@ -1,17 +1,64 @@
 nav {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    min-height: 10vh;
-    background: rgb(73,79,82);
-    color: white;
-  
-  }
-  
-  .nav-links {
-    width: 50%;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    list-style: none;
-  }
+  display: flex;
+  flex-flow: row;
+  color: white;
+  background: silver;
+  height: 40px;  
+}
+
+.nav-links {
+  width: 50%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  list-style: none;
+}
+
+
+.border {
+  border-width: 3px;
+  border-color: magenta;
+
+}
+
+.a {
+  background: lightseagreen;
+  width: 40px;
+  height: 40px;
+}
+
+.b {
+  background: lime;
+  width: 40px;
+  height: 40px;
+}
+
+.c {
+  background: cyan;
+  width: 40px;
+  height: 40px;
+}
+
+.d {
+  background: purple;
+  width: 40px;
+  height: 40px;
+}
+
+.e {
+  background: plum;
+  width: 40px;
+  height: 40px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 40px 40px 40px 40px 40px;  
+}
+
+
+.key {
+  background: silver;
+  color: yellow;
+  height: 40px;
+}
