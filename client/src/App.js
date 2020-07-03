@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './styles/App.css'
 import Nav from "./components/Nav"
 import Profile from './routes/Profile'
@@ -6,34 +6,94 @@ import Feed from './routes/Feed'
 import Search from './routes/Search'
 import Catalog from './routes/Catalog'
 import Upload from './routes/Upload'
-import Login from './routes/Login'
 import Logout from './routes/Logout'
 import Register from './routes/Register'
-import Button from './routes/Button'
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom'
 import Private from './routes/Private'
 import { AuthContext } from './routes/context/auth'
+import axios from 'axios'
 
 function App (props) {
   
+  const [ isLoggedIn, setLoggedIn ] = useState(false)
 
-  console.log(localStorage)
+  const Login = () => {
+    const [ isError, setIsError ] = useState(false)
+    const [ username, setUsername ] = useState('')
+    const [ password, setPassword ] = useState('')
+  
+    function postLogin() {
+      console.log('clicked')
+      axios({
+        method: 'post',
+        url: '/login',
+        data: {
+          username,
+          password
+        }
+      })
+      .then(result=> {
+        if (result.status === 200) {
+          setLoggedIn(true)
+          
+          console.log("SUCCESS")
+        } else {
+          setIsError(true)
+          console.log("FAILLL")
+        }
+      }).catch(e=> {
+        console.log('failed')
+        setIsError(true)
+      })
+    }
+
+    if(isLoggedIn){
+      return <Redirect to={'/profile'} />
+
+    }
+
+    return (
+      <>
+        <input 
+          name="username"
+          value={username}
+          onChange={(e)=>{
+            setUsername(e.target.value)          
+          }}
+        />
+        <br></br>
+        <input 
+          name="password"
+          type="password"
+          value={password}
+          onChange={(e)=>{
+            setPassword(e.target.value)          
+          }}
+        />
+        <br></br>
+        <button
+          onClick={postLogin}
+        >Submit</button>
+      </>
+    );
+  }
 
   return (
-    <AuthContext.Provider value={true}>
+    <AuthContext.Provider value={isLoggedIn}>
       <Router>
-        <Nav />
+        <Nav 
+          loggedIn={isLoggedIn}
+        />
         <Switch>
           <Route path="/" exact component={Home} />
           <Private path="/profile" component={Profile} />
-          <Route path="/feed" component={Feed}/>
-          <Route path="/search" component={Search}/>
-          <Route path="/catalog" exact component={Catalog} />
-          <Route path="/upload" exact component={Upload} />
+          <Private path="/feed" component={Feed}/>
+          <Private path="/search" component={Search}/>
+          <Private path="/catalog" exact component={Catalog} />
+          <Private path="/upload" exact component={Upload} />
           <Route path="/login" exact component={Login} />
           <Route path="/register" exact component={Register} />
           <Route path="/logout" exact component={Logout} />
-          <Route path="/button" exact component={Button} />
         
         </Switch>
       
@@ -49,3 +109,5 @@ const Home = () => (
 )
 
 export default App;
+
+//  "proxy": "http://localhost:8080"
