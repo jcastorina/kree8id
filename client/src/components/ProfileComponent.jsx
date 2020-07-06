@@ -8,7 +8,8 @@ class Profile extends Component {
 
         this.state = {
             friends: [],
-            get: false
+            get: false,
+            name: this.props.name
         }
     }
 
@@ -26,7 +27,7 @@ class Profile extends Component {
         
         return ( 
         <div>
-            <h1>profile</h1>               
+            <h1>{this.props.name}</h1>               
                 {this.state.friends?
                 <FriendsComponent
                     friends = {this.state.friends}

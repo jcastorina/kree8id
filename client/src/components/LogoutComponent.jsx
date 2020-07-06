@@ -7,6 +7,8 @@ class LogoutComponent extends Component {
 
     render() { 
 
+        
+
         return ( 
             <div>
             <form action="/logout" method="POST" className="form-signin">

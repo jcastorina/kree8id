@@ -1,7 +1,10 @@
 import React from 'react';
 import FeedComponent from '../components/FeedComponent'
 
-function Feed() {
+function Feed(props) {
+  
+  console.log(props)
+  
   return (
     <div> 
       <FeedComponent />

@@ -61,4 +61,6 @@ nav {
   background: silver;
   color: yellow;
   height: 40px;
+  width: 100%;
+  vertical-align: middle;
 }

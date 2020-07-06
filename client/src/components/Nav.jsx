@@ -10,9 +10,7 @@ class Nav extends Component {
 
   render() {
 
-    const { loggedIn } = this.props
-
-    console.log(loggedIn)
+    const { loggedIn, loaded } = this.props
 
     const navStyle = {
       color: 'white'
@@ -36,8 +34,9 @@ class Nav extends Component {
 
     return (
       <div>
-        {loggedIn?
-          <nav>
+        <nav>
+        {loaded?(loggedIn?
+          
             <ul className="nav-links">
                 <Link style={navStyle} to="/feed">
                   <li>Feed</li>
@@ -54,17 +53,18 @@ class Nav extends Component {
                 <Link style={navStyle} to="/search">
                   <li>Search</li>
                 </Link>
-                <Link style={navStyle} to="/register">
-                  <li>Register</li>
-                </Link>
+
                 <Link style={navStyle} to="/logout">
                   <li>Logout</li>
                 </Link>
             </ul>
-          </nav> 
+         
           :
-          <Key />
+          <Key />)
+          : <Key />
+          
         } 
+        </nav> 
         <Bumper classy={classy1} />
         <Bumper classy={classy2} />
       </div>
